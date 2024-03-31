@@ -98,26 +98,19 @@ class LinkedList{
 
         function secondToLast(current){
             if(current){
-                // if(current.next == fullList.tail || fullList.tail == fullList.head){
-                //     popped = fullList.tail;
-                //     current.next = null;
-
-                //     if(current.next == fullList.tail){
-                //         fullList.tail = current;
-                //     }
-                //     else{
-                //         // fullList.head = null;
-                //         // fullList.tail = null;
-                //     }
-                // }
-                // else{
-                //     secondToLast(current.next);
-                // }
-
-                if(current.next == fullList.tail){
+                // if we're at second-to-last, OR only one remains
+                if(current.next == fullList.tail || fullList.tail == fullList.head){
                     popped = fullList.tail;
                     current.next = null;
-                    fullList.tail = current;
+
+                    // if there was only one node left
+                    if(popped == fullList.head){
+                        fullList.head = null;
+                        fullList.tail = null;
+                    }
+                    else{
+                        fullList.tail = current;
+                    }
                 }
                 else{
                     secondToLast(current.next);
@@ -128,6 +121,24 @@ class LinkedList{
         secondToLast(this.head);
 
         return popped;
+    }
+
+    contains(value){
+        let found = false;
+
+        function searchValue(current){
+            if(current){
+                if(current.value == value){
+                    found = true;
+                }
+                else{
+                    searchValue(current.next);
+                }
+            }
+        }
+        searchValue(this.head);
+
+        return found;
     }
 
 }
@@ -143,25 +154,27 @@ testList.prepend('zero');
 testList.toString();
 testList.size();
 
-testList.pop();
-testList.toString();
-testList.size();
-testList.pop();
-testList.toString();
-testList.pop();
-testList.toString();
-testList.pop();
-testList.toString();
-testList.pop();
-testList.toString();
+// testList.pop();
+// testList.toString();
+// testList.size();
+// testList.pop();
+// testList.toString();
+// testList.append('hi');
+// testList.toString();
+// testList.pop();
+// testList.toString();
+// testList.pop();
+// testList.toString();
+// testList.pop();
+// testList.toString();
 
-
+// console.log(testList.contains('hi'));
+// console.log(testList.contains('three'));
 
 
 
 /*
 at(index) - return node at given index
-pop - remove last node
 contains(value) - return true/false if node with 'value' is present in list
 find(value) - return index of node with value (or null if not present)
 
