@@ -185,6 +185,70 @@ class LinkedList{
         }
     }
 
+
+    insertAt(value,index){
+        const fullList = this;
+        const newNode = new ListNode(value);
+
+        console.log('doing stuff');
+        console.log(fullList);
+        console.log(newNode);
+
+        // if list is empty, just put in list, OTHERWISE
+        if(this.#firstNodeCheck == false){
+            function checkIndex(current, previous){
+                if(index == 0 || current == null){
+
+                    if(previous == null){
+                        // current is head
+                        newNode.next = current;
+                        fullList.head = newNode;
+                    }
+                    else if(current == null){
+                        //current is tail
+                        previous.next = newNode;
+                        fullList.tail = newNode;
+                    }
+                    else{
+                        // middle of list somewhere
+                        previous.next = newNode;
+                        newNode.next = current;
+                    }
+
+                    /*
+                        possible states:
+                        current = something, previous = null (current is head)
+                            set head to new, set new.next to current
+                        current = something, previous = something
+                            set previous.next to new, set new.next to current
+                        current = null, previous = something (end of list)
+                            set previous.next to new, set tail to new
+                    */
+                }
+                else{
+                    index -= 1;
+                    checkIndex(current.next, current);
+                }
+            }
+            checkIndex(this.head, null)
+        }
+
+        
+
+        /*
+            find what is already AT the given index
+                (WHAT IF ITS NOTHING)
+            keep what is BEFORE the given index
+            set THAT node's 'next' to new element
+            set new element's next to the currently-at-index element
+                (WHAT IF INDEX IS 0)
+        */
+    }
+
+
+    // insertAt(value, index) - create new node and insert at given index
+    // removeAt(index) remove node at given index
+
 }
 
 
@@ -197,6 +261,15 @@ testList.prepend('zero');
 
 testList.toString();
 testList.size();
+
+
+testList.insertAt('one-point-five',2);
+testList.toString();
+testList.insertAt('beg',0);
+testList.toString();
+testList.insertAt('end',20);
+testList.toString();
+
 
 // testList.pop();
 // testList.toString();
@@ -223,11 +296,3 @@ testList.size();
 // console.log(testList.find('potato'));
 
 
-
-
-
-/*
-
-insertAt(value, index) - create new node and insert at given index
-removeAt(index) remove node at given index
-*/
