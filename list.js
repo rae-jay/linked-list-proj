@@ -141,6 +141,50 @@ class LinkedList{
         return found;
     }
 
+    at(index){
+        let node = null;
+
+        function checkIndex(current){
+            if(current){
+                if(index == 0){
+                    node = current;
+                }
+                else{
+                    index -= 1;
+                    checkIndex(current.next);
+                }
+            }
+        }
+        checkIndex(this.head);
+
+        return node;
+    }
+
+    find(value){
+        let index = 0;
+        let success = false;
+
+        function checkValue(current){
+            if(current){
+                if(current.value == value){
+                    success = true;
+                }
+                else{
+                    index += 1;
+                    checkValue(current.next);
+                }
+            }
+        }
+        checkValue(this.head);
+
+        if(success == true){
+            return index;
+        }
+        else{
+            return null;
+        }
+    }
+
 }
 
 
@@ -171,12 +215,18 @@ testList.size();
 // console.log(testList.contains('hi'));
 // console.log(testList.contains('three'));
 
+// console.log(testList.at(0));
+// console.log(testList.at(3));
+// console.log(testList.at(7));
+
+// console.log(testList.find('two'));
+// console.log(testList.find('potato'));
+
+
+
 
 
 /*
-at(index) - return node at given index
-contains(value) - return true/false if node with 'value' is present in list
-find(value) - return index of node with value (or null if not present)
 
 insertAt(value, index) - create new node and insert at given index
 removeAt(index) remove node at given index
