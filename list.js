@@ -190,12 +190,12 @@ class LinkedList{
         const fullList = this;
         const newNode = new ListNode(value);
 
-        console.log('doing stuff');
-        console.log(fullList);
-        console.log(newNode);
+        // console.log('doing stuff');
+        // console.log(fullList);
+        // console.log(newNode);
 
         // if list is empty, just put in list, OTHERWISE
-        if(this.#firstNodeCheck == false){
+        if(this.#firstNodeCheck(newNode) == false){
             function checkIndex(current, previous){
                 if(index == 0 || current == null){
 
